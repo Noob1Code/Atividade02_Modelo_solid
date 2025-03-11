@@ -5,16 +5,16 @@
 
 package Classes;
 
-import Interfaces.PedidoRepository;
+import Interfaces.Notificador;
 
 /**
  *
  * @author Kayque de Freitas <kayquefreitas08@gmail.com>
  * @data 10/03/2025
- * @brief Class PedidoDatabaseRepository
+ * @brief Class WhatsAppNotificador
  */
-public class PedidoDatabaseRepository implements PedidoRepository {
-    public void salvarPedido(Pedido pedido) {
-        System.out.println("Pedido salvo no banco de dados com valor: " + pedido.getValor());
+public class WhatsAppNotificador implements Notificador {
+    public void notificar(String mensagem) {
+        System.out.println("WhatsApp enviado: " + mensagem);
     }
 }

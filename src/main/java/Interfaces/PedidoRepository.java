@@ -10,9 +10,9 @@ import Classes.Pedido;
 /**
  *
  * @author Kayque de Freitas <kayquefreitas08@gmail.com>
- * @data 09/03/2025
+ * @data 10/03/2025
  * @brief Class PedidoRepository
  */
 public interface PedidoRepository {
-    void salvar(Pedido pedido);
+    void salvarPedido(Pedido pedido);
 }

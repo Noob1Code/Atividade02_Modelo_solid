@@ -7,28 +7,29 @@ package VIsao;
 
 import Classes.DescontoClienteVip;
 import Classes.EmailNotificador;
-import Classes.GerenciadorBancoDeDadosMySQL;
 import Classes.Pedido;
 import Classes.PedidoDatabaseRepository;
-import Classes.ProcessadorDePedidos;
-import Interfaces.GerenciadorBancoDeDados;
-import Interfaces.PedidoRepository;
+import Classes.PedidoFactory;
+import Classes.WhatsAppNotificador;
+import Interfaces.PedidoFactoryInterface;
+import Interfaces.ProcessadorDePedidosInterface;
 
 /**
  *
  * @author Kayque de Freitas <kayquefreitas08@gmail.com>
- * @data 09/03/2025
+ * @data 10/03/2025
  * @brief Class Main
  */
 public class Main {
-        public static void main(String[] args) {
-        GerenciadorBancoDeDados bancoDeDados = new GerenciadorBancoDeDadosMySQL("admin", "1234");
-        PedidoRepository pedidoRepository = new PedidoDatabaseRepository(bancoDeDados);
-        
-        Pedido pedido = new Pedido(100.0, new DescontoClienteVip(), new EmailNotificador());
-        ProcessadorDePedidos processador = new ProcessadorDePedidos(pedidoRepository);
-        processador.processar(pedido);
-        
-        ((PedidoDatabaseRepository) pedidoRepository).fecharConexao();
+    public static void main(String[] args) {
+        Pedido pedido = new Pedido(100);
+
+        PedidoFactoryInterface factoryEmail = new PedidoFactory(new EmailNotificador(), new PedidoDatabaseRepository(), new DescontoClienteVip());
+        ProcessadorDePedidosInterface processadorEmail = factoryEmail.criarProcessador();
+        processadorEmail.processar(pedido);
+
+        PedidoFactoryInterface factoryWhatsApp = new PedidoFactory(new WhatsAppNotificador(), new PedidoDatabaseRepository(), new DescontoClienteVip());
+        ProcessadorDePedidosInterface processadorWhatsApp = factoryWhatsApp.criarProcessador();
+        processadorWhatsApp.processar(pedido);
     }
 }

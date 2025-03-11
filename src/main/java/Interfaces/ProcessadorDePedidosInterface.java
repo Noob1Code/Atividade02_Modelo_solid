@@ -5,12 +5,14 @@
 
 package Interfaces;
 
+import Classes.Pedido;
+
 /**
  *
  * @author Kayque de Freitas <kayquefreitas08@gmail.com>
  * @data 10/03/2025
- * @brief Class Notificador
+ * @brief Class ProcessadorDePedidosInterface
  */
-public interface Notificador {
-    void notificar(String mensagem);
+public interface ProcessadorDePedidosInterface {
+        void processar(Pedido pedido);
 }
